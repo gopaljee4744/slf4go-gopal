@@ -199,6 +199,15 @@ func Info(v ...interface{}) {
 	globalLogger.print(InfoLevel, pc[0], nil, v...)
 }
 
+func Infoln(v ...interface{}) {
+	if !globalLogger.IsInfoEnabled() {
+		return
+	}
+	var pc [1]uintptr
+	_ = runtime.Callers(2, pc[:])
+	globalLogger.print(InfoLevel, pc[0], nil, v...)
+}
+
 // Infof reference Logger.Infof
 func Infof(format string, v ...interface{}) {
 	if !globalLogger.IsInfoEnabled() {

@@ -70,6 +70,9 @@ type Logger interface {
 	// Info record info level's log
 	Info(v ...interface{})
 
+	// Infoln record info level's log
+	Infoln(v ...interface{})
+
 	// Infof record info level's log with custom format.
 	Infof(format string, v ...interface{})
 
