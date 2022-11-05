@@ -125,6 +125,17 @@ func (l *logger) Infof(format string, v ...interface{}) {
 	l.printf(InfoLevel, pc[0], nil, format, v...)
 }
 
+func (l *logger) Infoln(v ...interface{}) {
+	if !l.IsInfoEnabled() {
+		return // don't need log
+	}
+	var pc [1]uintptr
+	_ = runtime.Callers(2, pc[:])
+	l.print(InfoLevel, pc[0], nil, v...)
+}
+
+
+
 func (l *logger) Warn(v ...interface{}) {
 	if !l.IsWarnEnabled() {
 		return // don't need log
