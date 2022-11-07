@@ -172,6 +172,15 @@ func (l *logger) Errorf(format string, v ...interface{}) {
 	l.printf(ErrorLevel, pc[0], nil, format, v...)
 }
 
+func (l *logger) Errorln(v ...interface{}) {
+	if !l.IsErrorEnabled() {
+		return // don't need log
+	}
+	var pc [1]uintptr
+	_ = runtime.Callers(2, pc[:])
+	l.print(ErrorLevel, pc[0], nil, v...)
+}
+
 func (l *logger) Panic(v ...interface{}) {
 	if !l.IsPanicEnabled() {
 		return // don't need log

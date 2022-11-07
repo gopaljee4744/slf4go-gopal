@@ -85,6 +85,9 @@ type Logger interface {
 	// Error record error level's log
 	Error(v ...interface{})
 
+	// Error record error level's log
+	Errorln(v ...interface{})
+
 	// Errorf record error level's log with custom format.
 	Errorf(format string, v ...interface{})
 

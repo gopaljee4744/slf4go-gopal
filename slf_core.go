@@ -258,6 +258,15 @@ func Errorf(format string, v ...interface{}) {
 	globalLogger.printf(ErrorLevel, pc[0], nil, format, v...)
 }
 
+func Errorln(v ...interface{}) {
+	if !globalLogger.IsErrorEnabled() {
+		return
+	}
+	var pc [1]uintptr
+	_ = runtime.Callers(2, pc[:])
+	globalLogger.print(ErrorLevel, pc[0], nil, v...)
+}
+
 // Panic reference Logger.Panic
 func Panic(v ...interface{}) {
 	if !globalLogger.IsPanicEnabled() {
